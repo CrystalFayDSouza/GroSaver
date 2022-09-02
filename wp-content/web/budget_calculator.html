@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>budget_calculator</title>
+    <style>	
+		.wrapper {
+    		width: 1200px;
+    		margin: 0 auto;
+		}
+    </style>
+</head>
+<body>
+	<form action="" method="post" name="myform" id="myform">
+		<div class="wrapper" id="_wrapper">        
+			
+			Please select your number of days 
+			<!-- 下拉框：number of days -->
+			<select name="num_of_days" id="num_of_days">
+				<option selected id="week">weekly</option>
+				<option id="month">monthly</option>
+				<option id="quarter">quarterly</option>
+			</select>
+			<br>
+			<br>
+			
+			
+			<!-- 根据下拉框内容决定budget -->
+			<!-- <input type="button" value="Budget" id="" onclick="xialakuang()"/><br><br> -->
+			<!-- Recommended budget result: <input name="budResult" type="text" id="budResult" autocomplete="off"/><br><br> -->
+
+			<!-- Number of days: <input type="text" name="number0" id="number0" autocomplete="off" placeholder="Please enter the days"/><br><br> -->
+
+			Number of children: <input type="text" name="number1" id="number1" autocomplete="off" /><br><br>
+		
+			Number of adults: <input type="text" name="number2" id="number2" autocomplete="off"/><br><br>	
+			
+			
+
+			<input type="radio" name="count" id="" value="" checked="checked"/>Meat 
+			<input type="radio" name="count" id="" value="" />Vegetable
+			<input type="radio" name="count" id="" value=""/>Staple food <br><br>
+		
+
+
+			<input type="button" value="calculate" id="" onclick="jisuan()" />
+			<input type="reset" value="reset" id="" /><br><br>
+			
+			Spending on meat/vegetable/staple (maximum): <input name="txtResult" type="text" id="txtResult" autocomplete="off"/>
+			<br><br>
+
+			Recommended budget result (maximum): <input name="budResult" type="text" id="budResult" autocomplete="off"/><br><br>
+			
+		</div>
+	</form>
+
+	<script>
+		
+		var str;
+		var num0 = 0; // days
+		var num1 = 0; // num of children
+		var num2 = 0; // num of adults
+		
+		var budget = 0;	// overall spending 
+
+		var meat_kilo_child = 0.1;
+		var meat_kilo_adult = 0.2;
+		var meat_price = 20;
+		var vege_kilo_child = 0.25;
+		var vege_kilo_adult = 0.5;
+		var vege_price = 3.2;
+		var staple_kilo_child = 0.15;
+		var staple_kilo_adult = 0.3;
+		var staple_price = 6;
+		
+
+
+		// 如果下拉框选中，sum0变成对应数值
+		function xialakuang(){
+			if(document.getElementById("week").selected==true){
+				num0 = 7;
+			}
+			else if(document.getElementById("month").selected==true){
+				num0 = 30;
+			}
+			else if(document.getElementById("quarter").selected==true){
+				num0 = 90;
+			}
+			else{
+				alert("单选框异常，未选中！");
+			}			
+			return num0;
+		}		
+			
+		//点击事件	//document.form的name值.input的name值.value
+		function jisuan(){
+			str = document.getElementsByName('count');
+			num0 = xialakuang()
+			num1 = parseFloat(document.myform.number1.value);
+			num2 = parseFloat(document.myform.number2.value);
+			
+			//判断文本框是否为空
+			//注意此处文本框获取值时使用了parseFloat转换，所以当文本框为空时是NaN，并不是""和null，所以需要用到isNaN来判断。
+			if(isNaN(num1) && isNaN(num2)){
+				alert("please enter the number！");
+			}
+			else if(isNaN(num1)){
+				alert("please enter the number！");
+			}
+			else if(isNaN(num2)){
+				alert("please enter the number！");
+			}
+			else{
+				danxuankuang();
+			}	
+
+			// 判断
+
+			
+		}
+
+		
+		//判断单选框是否选中
+		function danxuankuang(){
+
+			// meat, vegetable, staple是变量
+			// meat: price*kilo, vegetable: price*kilo, staple:price*kilo
+
+			document.myform.budResult.value = (num0*(num1*(meat_kilo_child*meat_price+vege_kilo_child*vege_price+staple_kilo_child*staple_price)+num2*(meat_kilo_adult*meat_price+vege_kilo_adult*vege_price+staple_kilo_adult*staple_price))).toFixed(2);
+			// price*kilo
+
+			budget = document.myform.budResult.value;
+
+			if(str[0].checked == true){
+				// meat
+				document.myform.txtResult.value=(budget*0.25).toFixed(2);
+			}
+			else if(str[1].checked == true){
+				// vegetable
+				document.myform.txtResult.value=(budget*0.35).toFixed(2);
+			}
+			else if(str[2].checked == true){
+				// staple
+				document.myform.txtResult.value=(budget*0.4).toFixed(2);
+			}
+			else{
+				alert("not selected!");
+			}
+		}		
+
+
+		
+		
+	</script>
+</body>
+</html>

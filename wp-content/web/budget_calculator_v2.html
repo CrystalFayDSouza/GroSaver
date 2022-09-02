@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+    <form action="" method="post" name="myform" id="myform">
+        <h1>Questionnaire</h1>
+        <div>Please enter your budget days</div>
+        <input type="text" value="0" class="days" name="days" id="days" >
+        <input type="button" onclick="add1()" value="+"><input type="button" onclick="sub1()" value="-"></td>
+        <br>
+        <br>
+        <div>How many children in your family? </div>
+        <input type="text" value="0" class="children" name="children" id="children" >
+        <input type="button" onclick="add2()" value="+"><input type="button" onclick="sub2()" value="-"></td>
+        <br>
+        <br>
+        <div>How many adults in your family? </div>
+        <input type="text" value="0" class="adult" name="adult" id="adult" >
+        <input type="button" onclick="add3()" value="+"><input type="button" onclick="sub3()" value="-"></td>
+        <br>
+        <br>
+        <input type="button" value="calculate" id="" onclick="jisuan()" />
+        <input type="reset" value="reset" id="" />
+        <input type="button" value="click for lower budget" id="lowerbudget" onclick="jisuan2()" /><br><br>
+        Recommended total budget for your family: 
+        <br>
+        <input name="txtResult" type="text" id="txtResult" autocomplete="off" placeholder="maximum budget"/> AUD
+		<br><br>
+        <!-- Recommended total budget for child: 
+        <br>
+        <input name="childResult" type="text" id="childResult" autocomplete="off"/>
+		<br><br>
+        Recommended total budget for adult: 
+        <br>
+        <input name="adultResult" type="text" id="adultResult" autocomplete="off"/>
+		<br><br> -->
+
+        
+		<input type="radio" name="count" id="" value="" checked="checked"/>Meat 
+		<input type="radio" name="count" id="" value=""/>Vegetable
+		<input type="radio" name="count" id="" value=""/>Fruit 
+        <input type="radio" name="count" id="" value=""/>Milk 
+        <input type="radio" name="count" id="" value=""/>Staple
+        <br>
+        <br>
+        Spending on meat/vegetable/fruit/milk/staple: 
+        <br>
+        <input name="sepResult" type="text" id="sepResult" autocomplete="off" placeholder="maximum spending"/> AUD
+        <br>
+        <br>
+
+	</form>
+ 
+
+ 
+<script>
+    
+    // 增加
+    function add1(){
+        var txt = document.getElementsByClassName("days")[0];
+        var num_days = txt.value;
+        num_days++;
+        txt.value = num_days;
+    }
+    // 减少
+    function sub1(){
+        var txt = document.getElementsByClassName("days")[0];
+        var a = txt.value;
+        if(a>0){
+            a--;
+            txt.value = a;
+        }else{
+            txt.value = 0;
+        }
+        
+    }
+
+    // 增加
+    function add2(){
+        var txt = document.getElementsByClassName("children")[0];
+        var a = txt.value;
+        a++;
+        txt.value = a;
+    }
+    
+    // 减少
+    function sub2(){
+        var txt = document.getElementsByClassName("children")[0];
+        var a = txt.value;
+        if(a>0){
+            a--;
+            txt.value = a;
+        }else{
+            txt.value = 0;
+        }
+        
+    }
+
+    // 增加
+    function add3(){
+        var txt = document.getElementsByClassName("adult")[0];
+        var a = txt.value;
+        a++;
+        txt.value = a;
+    }
+
+    // 减少
+    function sub3(){
+        var txt = document.getElementsByClassName("adult")[0];
+        var a = txt.value;
+        if(a>0){
+            a--;
+            txt.value = a;
+        }else{
+            txt.value = 0;
+        }
+        
+    }
+
+    
+
+    function jisuan(){
+
+
+        var num_days = parseFloat(document.myform.days.value);
+        var num_child = parseFloat(document.myform.children.value);
+        var num_adult = parseFloat(document.myform.adult.value);
+        console.log(typeof num_days);
+        console.log(num_child);
+        console.log(num_adult);
+
+        var chid_total = 0;
+        var adult_total = 0;
+        // undefined : trigger
+        var trig; 
+        // console.log(trig)
+
+        if(isNaN(num_days) && isNaN(num_child)&& isNaN(num_adult)){
+			alert("please enter the number");
+		}
+		else if(isNaN(num_days)){
+			alert("please enter the correct number of days");
+		}
+		else if(isNaN(num_child)){
+			alert("please enter the correct number of child");
+		}
+        else if(isNaN(num_adult)) {
+            alert("please enter the correct number of adult");
+        }
+        else if (num_days < 0) {
+            alert("please enter positive number for days")
+        }
+        else if (num_adult < 0) {
+            alert("please enter positive number for children in family option")
+        }
+        else if (num_child < 0) {
+            alert("please enter positive number for adult in family option")
+        }
+		else{
+            budget_cal(num_days,num_child,num_adult,trig);
+		}
+    }
+
+    // lower budget
+    function jisuan2() {
+        var num_days = parseFloat(document.myform.days.value);
+        var num_child = parseFloat(document.myform.children.value);
+        var num_adult = parseFloat(document.myform.adult.value);
+        console.log(typeof num_days);
+        console.log(num_child);
+        console.log(num_adult);
+
+        var chid_total = 0;
+        var adult_total = 0;
+        // undefined : trigger
+        var trig; 
+        // console.log(trig)
+
+        if(isNaN(num_days) && isNaN(num_child)&& isNaN(num_adult)){
+			alert("please enter the number");
+		}
+		else if(isNaN(num_days)){
+			alert("please enter the number");
+		}
+		else if(isNaN(num_child)){
+			alert("please enter the number");
+		}
+        else if(isNaN(num_adult)) {
+            alert("please enter the number");
+        }
+        else if (num_days < 0) {
+            alert("please enter positive number for days")
+        }
+        else if (num_adult < 0) {
+            alert("please enter positive number for children in family option")
+        }
+        else if (num_child < 0) {
+            alert("please enter positive number for adult in family option")
+        }
+		else{
+            budget_cal(num_days,num_child,num_adult,-1);
+		}	
+    }
+
+
+
+    // 构造函数
+    function Food_percent_price(meat,vege,fruit,milk,staple) {
+        this.meat = meat;
+        this.vege = vege;
+        this.fruit = fruit;
+        this.milk = milk;
+        this.staple = staple;
+    }
+
+    var child_gram = new Food_percent_price(0.14,0.35,0.245,0.350,0.210);
+    var adult_gram = new Food_percent_price(0.200,0.500,0.350,0.500,0.300);
+    var food_price_average = new Food_percent_price(12.7,3.2,5,3.35,5.25);
+
+
+    
+
+    function budget_cal(num_days,num_child,num_adult,trigger){
+
+        str = document.getElementsByName('count');
+
+        var child_total = 0;
+        var adult_total = 0;
+
+        if (num_child > 0){
+            child_total = num_days*((child_gram.meat*food_price_average.meat + child_gram.vege*food_price_average.vege + child_gram.fruit*food_price_average.fruit
+            + child_gram.milk*food_price_average.milk + child_gram.staple*food_price_average.staple)).toFixed(2);
+
+        }
+        // console.log(child_total)
+        // document.myform.childResult.value = (child_total).toFixed(2);
+
+        if (num_adult > 0){
+            adult_total = num_days*((adult_gram.meat*food_price_average.meat + adult_gram.vege*food_price_average.vege + 
+            adult_gram.fruit*food_price_average.fruit + adult_gram.milk*food_price_average.milk + adult_gram.staple*food_price_average.staple)).toFixed(2);
+        }
+        // console.log(adult_total)
+        // document.myform.adultResult.value = (adult_total).toFixed(2);
+
+        if (trigger === undefined){
+        
+            document.myform.txtResult.value = (child_total+adult_total).toFixed(2);
+
+            if(str[0].checked == true){
+                // meat
+                document.myform.sepResult.value=((child_gram.meat+adult_gram.meat)*food_price_average.meat).toFixed(2);
+            }
+            else if(str[1].checked == true){
+                // vegetable
+                document.myform.sepResult.value=((child_gram.vege+adult_gram.vege)*food_price_average.vege).toFixed(2);
+            }
+            else if(str[2].checked == true){
+                // fruit
+                document.myform.sepResult.value=((child_gram.fruit+adult_gram.fruit)*food_price_average.fruit).toFixed(2);
+            }
+            else if(str[3].checked == true){
+                // milk
+                document.myform.sepResult.value=((child_gram.milk+adult_gram.milk)*food_price_average.milk).toFixed(2);
+            }
+            else if(str[4].checked == true){
+                // staple
+                document.myform.sepResult.value=((child_gram.staple+adult_gram.staple)*food_price_average.staple).toFixed(2);
+            }
+            else{
+                alert("not selected!");
+            }
+        }
+        else{
+            document.myform.txtResult.value = ((child_total+adult_total)*0.6).toFixed(2);
+            if(str[0].checked == true){
+                // meat
+                document.myform.sepResult.value=(((child_gram.meat+adult_gram.meat)*food_price_average.meat)*0.6).toFixed(2);
+            }
+            else if(str[1].checked == true){
+                // vegetable
+                document.myform.sepResult.value=(((child_gram.vege+adult_gram.vege)*food_price_average.vege)*0.6).toFixed(2);
+            }
+            else if(str[2].checked == true){
+                // fruit
+                document.myform.sepResult.value=(((child_gram.fruit+adult_gram.fruit)*food_price_average.fruit)*0.6).toFixed(2);
+            }
+            else if(str[3].checked == true){
+                // milk
+                document.myform.sepResult.value=(((child_gram.milk+adult_gram.milk)*food_price_average.milk)*0.6).toFixed(2);
+            }
+            else if(str[4].checked == true){
+                // staple
+                document.myform.sepResult.value=(((child_gram.staple+adult_gram.staple)*food_price_average.staple)*0.6).toFixed(2);
+            }
+            else{
+                alert("not selected!");
+            }
+        }
+       
+
+        
+        
+
+       
+
+        
+        
+
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+2022-09-19T11:47:47+00:00 CRITICAL Out of memory (allocated 111677440) (tried to allocate 1937408 bytes) in /opt/bitnami/grosave.tk/wp-includes/wp-db.php on line 2135
+
